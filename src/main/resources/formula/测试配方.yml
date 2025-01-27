@@ -1,0 +1,7 @@
+id: 测试配方
+group: 测试组
+produce: 测试物品
+number: 1
+item:
+  - 测试物品 1
+money: 1

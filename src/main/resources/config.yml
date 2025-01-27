@@ -1,0 +1,9 @@
+debug: true
+prefix: "§6[锻造系统]"
+tips:
+  forge: "§a点击开始锻造"
+  number: "§f所需数量 §a%need%§f/§7%have%"
+messages:
+  forge_success: "§a成功锻造了 %name% * %number%"
+  no_item: "§c你没有足够的物品"
+  no_money: "§c你没有足够的金币"

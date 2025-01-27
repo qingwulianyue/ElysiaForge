@@ -8,7 +8,7 @@ public class HelpCommand {
             sender.sendMessage("/ElysiaForge help   -   获取帮助");
             sender.sendMessage("/ElysiaForge reload   -   重载插件");
             sender.sendMessage("/ElysiaForge openformula {player} {id}   -   为玩家开启对应配方的锻造页面");
-            sender.sendMessage("/ElysiaForge opengroup {player} {group}   -   为玩家开启对应分组的展示页面");
+            sender.sendMessage("/ElysiaForge opengroup {player} {group} {page}    -   为玩家开启对应分组的对应页数展示页面");
         }
     }
 }

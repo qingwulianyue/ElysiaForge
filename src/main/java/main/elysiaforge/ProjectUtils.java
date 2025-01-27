@@ -8,6 +8,9 @@ public class ProjectUtils {
     public static boolean checkMythicItem(ItemStack itemStack, String id){
         return MythicMobs.inst().getItemManager().getItemStack(id).isSimilar(itemStack);
     }
+    public static ItemStack getMythicItem(String id){
+        return MythicMobs.inst().getItemManager().getItemStack(id);
+    }
     public static double getPlayerMoney(String playerName){
         return new XConomyAPI().getPlayerData(playerName).getBalance().doubleValue();
     }

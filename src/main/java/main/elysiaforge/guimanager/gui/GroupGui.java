@@ -1,0 +1,43 @@
+package main.elysiaforge.guimanager.gui;
+
+import main.elysiaforge.ElysiaForge;
+import main.elysiaforge.override.GroupGuiHolder;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
+
+public class GroupGui {
+    private Inventory inventory;
+    public void createFormulaGui(String id, int page){
+        List<String> formulaDataList = ElysiaForge.getFormulaManager().getFormulaDataGroup(id);
+        inventory = Bukkit.createInventory(new GroupGuiHolder(), 45, id);
+        ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
+        ItemStack next = new ItemStack(Material.ARROW);
+        ItemMeta nextMeta = next.getItemMeta();
+        nextMeta.setDisplayName("下一页");
+        next.setItemMeta(nextMeta);
+        ItemStack last = new ItemStack(Material.ARROW);
+        ItemMeta lastMeta = last.getItemMeta();
+        lastMeta.setDisplayName("上一页");
+        last.setItemMeta(lastMeta);
+        ItemStack pageItem = new ItemStack(Material.PAPER);
+        ItemMeta pageMeta = pageItem.getItemMeta();
+        pageMeta.setDisplayName("第" + page + "页");
+        pageItem.setItemMeta(pageMeta);
+        for (int i = 0; i < 45; i++){
+            if ((i >= 10 && i <= 16) || (i >= 19 && i <= 25) || (i >= 28 && i <= 34) || i == 44 || i == 40 || i == 36)
+                continue;
+            inventory.setItem(i, glass);
+        }
+        inventory.setItem(44, next);
+        inventory.setItem(40, pageItem);
+        inventory.setItem(36, last);
+    }
+    public void openInventory(String name){
+        Bukkit.getPlayer(name).openInventory(inventory);
+    }
+}

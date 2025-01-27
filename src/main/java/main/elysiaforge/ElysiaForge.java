@@ -1,8 +1,10 @@
 package main.elysiaforge;
 
 import main.elysiaforge.command.CommandManager;
+import main.elysiaforge.command.CommandTabComplete;
 import main.elysiaforge.filemanager.ConfigManager;
 import main.elysiaforge.filemanager.FormulaManager;
+import main.elysiaforge.guimanager.GuiManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +18,7 @@ public final class ElysiaForge extends JavaPlugin {
     private static ElysiaForge instance;
     private static ConfigManager configManager;
     private static FormulaManager formulaManager;
+    private static GuiManager guiManager;
     public static ElysiaForge getInstance() {
         return instance;
     }
@@ -25,17 +28,21 @@ public final class ElysiaForge extends JavaPlugin {
     public static FormulaManager getFormulaManager() {
         return formulaManager;
     }
-
+    public static GuiManager getGuiManager() {
+        return guiManager;
+    }
     @Override
     public void onEnable() {
         // Plugin startup logic
         instance = this;
         configManager = ConfigManager.getInstance();
         formulaManager = FormulaManager.getInstance();
+        guiManager = GuiManager.getInstance();
         createFile();
         configManager.loadConfig();
         formulaManager.load();
         Bukkit.getPluginCommand("ElysiaForge").setExecutor(new CommandManager());
+        Bukkit.getPluginCommand("ElysiaForge").setTabCompleter(new CommandTabComplete());
     }
 
     @Override

@@ -5,11 +5,9 @@ import main.elysiaforge.filemanager.data.FormulaData;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class FormulaManager {
     private FormulaManager(){}
@@ -28,6 +26,9 @@ public class FormulaManager {
     }
     public List<String> getGroupList(){
         return new ArrayList<>(formulaDataGroupHashMap.keySet());
+    }
+    public List<String> getFormulaDataList(){
+        return new ArrayList<>(formulaDataHashMap.keySet());
     }
 
     public void load(){

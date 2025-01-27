@@ -1,7 +1,9 @@
 package main.elysiaforge;
 
+import main.elysiaforge.command.CommandManager;
 import main.elysiaforge.filemanager.ConfigManager;
 import main.elysiaforge.filemanager.FormulaManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ public final class ElysiaForge extends JavaPlugin {
         createFile();
         configManager.loadConfig();
         formulaManager.load();
+        Bukkit.getPluginCommand("ElysiaForge").setExecutor(new CommandManager());
     }
 
     @Override

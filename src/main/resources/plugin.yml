@@ -1,3 +1,6 @@
 name: ElysiaForge
 version: '${project.version}'
 main: main.elysiaforge.ElysiaForge
+commands:
+  ElysiaForge:
+    permission: admin

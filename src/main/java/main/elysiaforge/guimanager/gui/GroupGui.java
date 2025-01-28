@@ -1,6 +1,8 @@
 package main.elysiaforge.guimanager.gui;
 
 import main.elysiaforge.ElysiaForge;
+import main.elysiaforge.ProjectUtils;
+import main.elysiaforge.filemanager.data.FormulaData;
 import main.elysiaforge.override.GroupGuiHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -36,6 +38,16 @@ public class GroupGui {
         inventory.setItem(44, next);
         inventory.setItem(40, pageItem);
         inventory.setItem(36, last);
+        for (int start = ( page - 1 ) * 21,i = 10;start < formulaDataList.size() && i <= 34;start++){
+            FormulaData formulaData = ElysiaForge.getFormulaManager().getFormulaData(formulaDataList.get(start));
+            ItemStack formulaItem = ProjectUtils.getMythicItem(formulaData.getProduce());
+            inventory.setItem(i, formulaItem);
+            if (i == 16)
+                i = 19;
+            else if (i == 25)
+                i = 28;
+            i++;
+        }
     }
     public void openInventory(String name){
         Bukkit.getPlayer(name).openInventory(inventory);

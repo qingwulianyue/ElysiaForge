@@ -2,6 +2,7 @@ package main.elysiaforge.guimanager;
 
 import main.elysiaforge.guimanager.gui.FormulaGui;
 import main.elysiaforge.guimanager.gui.GroupGui;
+import org.bukkit.Bukkit;
 
 public class GuiManager {
     private GuiManager() {}
@@ -16,7 +17,7 @@ public class GuiManager {
     }
     public void openGui(String id,String playerName){
         FormulaGui formulaGui = new FormulaGui();
-        formulaGui.createFormulaGui(id);
+        formulaGui.createFormulaGui(id, Bukkit.getPlayer(playerName).getUniqueId());
         formulaGui.openInventory(playerName);
     }
 }

@@ -51,24 +51,26 @@ public class FormulaManager {
         }
     }
     private void loadFormulaData(YamlConfiguration config) {
-        String id = config.getString("id");
-        String group = config.getString("group");
-        FormulaData formulaData = new FormulaData(
-                id,
-                config.getString("group"),
-                config.getString("produce"),
-                config.getInt("number"),
-                config.getStringList("item"),
-                config.getInt("money")
-         );
-        formulaDataHashMap.put(id, formulaData);
-        List<String> groupList = formulaDataGroupHashMap.get(group);
-        if (groupList == null || groupList.isEmpty()) {
-            groupList = new ArrayList<>();
-            groupList.add(id);
-        } else
-            groupList.add(id);
-        formulaDataGroupHashMap.put(group, groupList);
+        for (String key : config.getKeys(false)){
+            String group = config.getString(key + ".group");
+            FormulaData formulaData = new FormulaData(
+                    key,
+                    group,
+                    config.getString(key + ".produce"),
+                    config.getInt(key + ".number"),
+                    config.getStringList(key + ".item"),
+                    config.getInt(key + ".money")
+            );
+            formulaDataHashMap.put(key, formulaData);
+            List<String> groupList = formulaDataGroupHashMap.get(group);
+            if (groupList == null || groupList.isEmpty()) {
+                groupList = new ArrayList<>();
+                groupList.add(key);
+            } else
+                groupList.add(key);
+            formulaDataGroupHashMap.put(group, groupList);
+            logFormulaDataIfDebug(formulaData);
+        }
     }
     private void logFormulaDataIfDebug(FormulaData formulaData){
         if (plugin.getConfig().getBoolean("debug")) {

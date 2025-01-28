@@ -9,8 +9,10 @@ public class OpenGroupCommand {
             String playerName = args[1];
             String id = args[2];
             int page = Integer.parseInt(args[3]);
-            if (ElysiaForge.getFormulaManager().getGroupList().contains(id))
-                ElysiaForge.getGuiManager().openGui(id, playerName, page);
+            if (ElysiaForge.getFormulaManager().getGroupList().contains(id)){
+                if (ElysiaForge.getFormulaManager().getFormulaDataGroup(id).size() / 21 + 1 >= page && page > 0)
+                    ElysiaForge.getGuiManager().openGui(id, playerName, page);
+            }
         }
     }
 }

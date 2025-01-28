@@ -5,6 +5,7 @@ import main.elysiaforge.command.CommandTabComplete;
 import main.elysiaforge.filemanager.ConfigManager;
 import main.elysiaforge.filemanager.FormulaManager;
 import main.elysiaforge.guimanager.GuiManager;
+import main.elysiaforge.listener.ElysiaForgeListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,6 +44,7 @@ public final class ElysiaForge extends JavaPlugin {
         formulaManager.load();
         Bukkit.getPluginCommand("ElysiaForge").setExecutor(new CommandManager());
         Bukkit.getPluginCommand("ElysiaForge").setTabCompleter(new CommandTabComplete());
+        Bukkit.getPluginManager().registerEvents(new ElysiaForgeListener(), this);
     }
 
     @Override

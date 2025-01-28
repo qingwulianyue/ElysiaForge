@@ -14,6 +14,11 @@ public class ConfigManager {
     public static ConfigManager getInstance(){
         return instance;
     }
+    public ConfigData getConfigData(){
+        if (configData == null)
+            loadConfig();
+        return configData;
+    }
     public void loadConfig(){
         configData = null;
         plugin.reloadConfig();

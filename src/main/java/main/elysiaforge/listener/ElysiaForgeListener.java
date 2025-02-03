@@ -139,10 +139,10 @@ public class ElysiaForgeListener implements Listener {
                         return;
                     }
                 }
+                //玩家通过了全部的检定则进入锻造成功步骤
+                onPlayerForgeSuccess(uuid, id);
             }
         }.runTaskAsynchronously(ElysiaForge.getInstance());
-        //玩家通过了全部的检定则进入锻造成功步骤
-        onPlayerForgeSuccess(uuid, id);
     }
 
     /**

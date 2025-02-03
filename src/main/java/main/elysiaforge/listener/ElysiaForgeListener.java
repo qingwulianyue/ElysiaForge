@@ -12,8 +12,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -182,6 +184,7 @@ public class ElysiaForgeListener implements Listener {
                         }
                     }
                 }
+                updateGuiItemLore(uuid, id);
             }
         }.runTaskAsynchronously(ElysiaForge.getInstance());
         //给予锻造物品
@@ -194,5 +197,52 @@ public class ElysiaForgeListener implements Listener {
                         .replace("%name%", formulaData.getProduce())
                         .replace("%number%", String.valueOf(formulaData.getNumber()))
         );
+    }
+
+    /**
+     * 更新页面显示
+     * @param uuid 玩家uuid
+     * @param id 配方id
+     */
+    private void updateGuiItemLore(UUID uuid, String id){
+        FormulaData formulaData = ElysiaForge.getFormulaManager().getFormulaData(id);
+        Inventory inventory = Bukkit.getPlayer(uuid).getOpenInventory().getTopInventory();
+        int i = 14;
+        for (String item : formulaData.getItem()){
+            String [] itemData = item.split(" ");
+            ItemStack itemStack = ProjectUtils.getMythicItem(itemData[0]);
+            itemStack.setAmount(Integer.parseInt(itemData[1]));
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            List<String> lore;
+            if (itemMeta.hasLore())
+                lore = itemMeta.getLore();
+            else
+                lore = new ArrayList<>();
+            lore.add(ElysiaForge.getConfigManager().getConfigData().getTips()
+                    .get("number")
+                    .replaceAll("%need%", itemData[1])
+                    .replaceAll("%have%", String.valueOf(getPlayerItemAmount(uuid, itemData[0]))));
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
+            inventory.setItem(i, itemStack);
+            System.out.println(lore);
+            if (i == 16) i = 23;
+            else if(i == 25) i = 32;
+            else if(i == 34)break;
+            i++;
+        }
+    }
+    private int getPlayerItemAmount(UUID uuid, String id){
+        Player player = Bukkit.getPlayer(uuid);
+        ItemStack itemStack = ProjectUtils.getMythicItem(id);
+        String displayName = itemStack.getItemMeta().getDisplayName();
+        Inventory inventory = player.getInventory();
+        int amount = 0;
+        for (ItemStack item : inventory.getContents()){
+            if (item == null || item.getType() != itemStack.getType()) continue;
+            if (item.getItemMeta().getDisplayName().equals(displayName))
+                amount += item.getAmount();
+        }
+        return amount;
     }
 }

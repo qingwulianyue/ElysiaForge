@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 锻造配方gui
+ */
+
 public class FormulaGui {
     private Inventory inventory;
     public void createFormulaGui(String id, UUID uuid){

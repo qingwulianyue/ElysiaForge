@@ -12,6 +12,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
+/**
+ * 分组展示gui
+ */
 public class GroupGui {
     private Inventory inventory;
     public void createFormulaGui(String id, int page){

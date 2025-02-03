@@ -15,6 +15,11 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+/**
+ * @author elysia
+ * @date 2024/1/28
+ * @project 锻造插件
+ **/
 
 public final class ElysiaForge extends JavaPlugin {
     private static ElysiaForge instance;

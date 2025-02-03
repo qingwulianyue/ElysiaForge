@@ -58,7 +58,6 @@ public class FormulaGui {
                 lore = itemMeta.getLore();
             else
                 lore = new ArrayList<>();
-
             lore.add(ElysiaForge.getConfigManager().getConfigData().getTips()
                     .get("number")
                     .replaceAll("%need%", itemData[1])

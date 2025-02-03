@@ -1,8 +1,10 @@
 package main.elysiaforge.guimanager;
 
+import main.elysiaforge.ElysiaForge;
 import main.elysiaforge.guimanager.gui.FormulaGui;
 import main.elysiaforge.guimanager.gui.GroupGui;
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Gui创建管理器
@@ -21,9 +23,15 @@ public class GuiManager {
      * @param page 页码
      */
     public void openGui(String id,String playerName,int page){
-        GroupGui groupGui = new GroupGui();
-        groupGui.createFormulaGui(id, page);
-        groupGui.openInventory(playerName);
+        new BukkitRunnable(){
+
+            @Override
+            public void run() {
+                GroupGui groupGui = new GroupGui();
+                groupGui.createFormulaGui(id, page);
+                groupGui.openInventory(playerName);
+            }
+        }.runTaskAsynchronously(ElysiaForge.getInstance());
     }
     /**
      * 打开指定配方对应的锻造页面
@@ -31,8 +39,13 @@ public class GuiManager {
      * @param playerName 玩家名
      */
     public void openGui(String id,String playerName){
-        FormulaGui formulaGui = new FormulaGui();
-        formulaGui.createFormulaGui(id, Bukkit.getPlayer(playerName).getUniqueId());
-        formulaGui.openInventory(playerName);
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                FormulaGui formulaGui = new FormulaGui();
+                formulaGui.createFormulaGui(id, Bukkit.getPlayer(playerName).getUniqueId());
+                formulaGui.openInventory(playerName);
+            }
+        }.runTaskAsynchronously(ElysiaForge.getInstance());
     }
 }

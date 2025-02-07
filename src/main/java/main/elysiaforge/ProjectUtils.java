@@ -1,7 +1,7 @@
 package main.elysiaforge;
 
 import io.lumine.xikage.mythicmobs.MythicMobs;
-import me.yic.xconomy.api.XConomyAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 public class ProjectUtils {
@@ -17,7 +17,7 @@ public class ProjectUtils {
      * @param playerName  玩家名
      **/
     public static double getPlayerMoney(String playerName){
-        return new XConomyAPI().getPlayerData(playerName).getBalance().doubleValue();
+        return ElysiaForge.getEconomy().getBalance(Bukkit.getPlayer(playerName));
     }
     /**
      * 设置指定的玩家余额
@@ -25,6 +25,6 @@ public class ProjectUtils {
      * @param money  X余额
      **/
     public static void setPlayerMoney(String playerName, double money){
-        new XConomyAPI().getPlayerData(playerName).setBalance(new XConomyAPI().formatdouble(String.valueOf(money)));
+        ElysiaForge.getEconomy().depositPlayer(Bukkit.getPlayer(playerName), money);
     }
 }

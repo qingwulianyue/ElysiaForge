@@ -7,7 +7,9 @@ import main.elysiaforge.filemanager.FileListener;
 import main.elysiaforge.filemanager.FormulaManager;
 import main.elysiaforge.guimanager.GuiManager;
 import main.elysiaforge.listener.ElysiaForgeListener;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ public final class ElysiaForge extends JavaPlugin {
     private static ConfigManager configManager;
     private static FormulaManager formulaManager;
     private static GuiManager guiManager;
+    private static Economy economy;
     public static ElysiaForge getInstance() {
         return instance;
     }
@@ -37,6 +40,9 @@ public final class ElysiaForge extends JavaPlugin {
     }
     public static GuiManager getGuiManager() {
         return guiManager;
+    }
+    public static Economy getEconomy() {
+        return economy;
     }
     @Override
     public void onEnable() {
@@ -51,6 +57,8 @@ public final class ElysiaForge extends JavaPlugin {
         Bukkit.getPluginCommand("ElysiaForge").setExecutor(new CommandManager());
         Bukkit.getPluginCommand("ElysiaForge").setTabCompleter(new CommandTabComplete());
         Bukkit.getPluginManager().registerEvents(new ElysiaForgeListener(), this);
+        RegisteredServiceProvider< Economy > rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        economy = rsp.getProvider();
         FileListener.startWatching(getDataFolder());
     }
 

@@ -225,7 +225,6 @@ public class ElysiaForgeListener implements Listener {
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
             inventory.setItem(i, itemStack);
-            System.out.println(lore);
             if (i == 16) i = 23;
             else if(i == 25) i = 32;
             else if(i == 34)break;

@@ -1,7 +1,13 @@
+#锻造配方的id，唯一标识
 测试配方:
+  #锻造配方所属的组
   group: 测试组
+  #锻造的产物，对应MythicMobs的物品id
   produce: 测试物品
+  #锻造产物的数量
   number: 1
+  #锻造所需要的材料，格式为 MythicMobs物品id 所需数量，上限为9个
   item:
     - 测试物品 1
+  #锻造所需要的金币，需要vaults
   money: 1

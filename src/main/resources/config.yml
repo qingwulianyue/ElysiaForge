@@ -1,8 +1,12 @@
-debug: true
+#debug开关
+debug: false
+#消息提示前缀
 prefix: "§6[锻造系统]"
+#锻造页面的提示信息
 tips:
   forge: "§a点击开始锻造"
   number: "§f所需数量 §a%need%§f/§7%have%"
+#消息提示内容
 messages:
   forge_success: "§a成功锻造了 %name% * %number%"
   no_item: "§c你没有足够的物品"

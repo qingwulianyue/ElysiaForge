@@ -9,7 +9,6 @@ import main.elysiaforge.guimanager.GuiManager;
 import main.elysiaforge.listener.ElysiaForgeListener;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -54,12 +53,13 @@ public final class ElysiaForge extends JavaPlugin {
         createFile();
         configManager.loadConfig();
         formulaManager.load();
+        if (!checkDependency()) return;
         Bukkit.getPluginCommand("ElysiaForge").setExecutor(new CommandManager());
         Bukkit.getPluginCommand("ElysiaForge").setTabCompleter(new CommandTabComplete());
         Bukkit.getPluginManager().registerEvents(new ElysiaForgeListener(), this);
-        RegisteredServiceProvider< Economy > rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        economy = rsp.getProvider();
+        economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
         FileListener.startWatching(getDataFolder());
+        getLogger().info("§e作者联系方式: 2569736791 有问题请联系");
     }
 
     @Override
@@ -98,5 +98,18 @@ public final class ElysiaForge extends JavaPlugin {
             throw new RuntimeException("Resource '/formula/测试配方.yml' not found in classpath.");
         }
         return resourceStream;
+    }
+    private boolean checkDependency(){
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null){
+            getLogger().info("§c未找到插件 Vault 正在卸载本插件");
+            getServer().getPluginManager().disablePlugin(this);
+            return false;
+        }
+        if (Bukkit.getPluginManager().getPlugin("MythicMobs") == null){
+            getLogger().info("§c未找到插件 MythicMobs 正在卸载本插件");
+            getServer().getPluginManager().disablePlugin(this);
+            return false;
+        }
+        return true;
     }
 }

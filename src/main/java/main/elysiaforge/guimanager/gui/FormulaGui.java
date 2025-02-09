@@ -51,7 +51,7 @@ public class FormulaGui {
         for (String item : formulaData.getItem()){
             String [] itemData = item.split(" ");
             ItemStack itemStack = ProjectUtils.getMythicItem(itemData[0]);
-            itemStack.setAmount(Integer.parseInt(itemData[1]));
+            itemStack.setAmount(Math.min(Integer.parseInt(itemData[1]), 64));
             ItemMeta itemMeta = itemStack.getItemMeta();
             List<String> lore;
             if (itemMeta.hasLore())

@@ -28,7 +28,7 @@ public class GuiManager {
             @Override
             public void run() {
                 GroupGui groupGui = new GroupGui();
-                groupGui.createFormulaGui(id, page);
+                groupGui.createFormulaGui(id, page, playerName);
                 groupGui.openInventory(playerName);
             }
         }.runTaskAsynchronously(ElysiaForge.getInstance());

@@ -6,6 +6,7 @@ import main.elysiaforge.filemanager.data.FormulaData;
 import main.elysiaforge.override.GroupGuiHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,7 +18,8 @@ import java.util.List;
  */
 public class GroupGui {
     private Inventory inventory;
-    public void createFormulaGui(String id, int page){
+    public void createFormulaGui(String id, int page, String playerName){
+        Player player = Bukkit.getPlayer(playerName);
         List<String> formulaDataList = ElysiaForge.getFormulaManager().getFormulaDataGroup(id);
         inventory = Bukkit.createInventory(new GroupGuiHolder(), 45, id);
         ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
@@ -43,6 +45,8 @@ public class GroupGui {
         inventory.setItem(36, last);
         for (int start = ( page - 1 ) * 21,i = 10;start < formulaDataList.size() && i <= 34;start++){
             FormulaData formulaData = ElysiaForge.getFormulaManager().getFormulaData(formulaDataList.get(start));
+            if (formulaData.isPermission() && !player.hasPermission("elysiaforge." + formulaData.getId()))
+                continue;
             ItemStack formulaItem = ProjectUtils.getMythicItem(formulaData.getProduce());
             inventory.setItem(i, formulaItem);
             if (i == 16)

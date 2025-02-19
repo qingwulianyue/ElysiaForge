@@ -7,13 +7,15 @@ public class FormulaData {
     private final String group;
     private final String produce;
     private final int number;
+    private final boolean permission;
     private final List<String> item;
     private final int money;
-    public FormulaData(String id, String group, String produce, int number, List<String> item, int money) {
+    public FormulaData(String id, String group, String produce, int number, boolean permission, List<String> item, int money) {
         this.id = id;
         this.group = group;
         this.produce = produce;
         this.number = number;
+        this.permission = permission;
         this.item = item;
         this.money = money;
     }
@@ -28,6 +30,9 @@ public class FormulaData {
     }
     public int getNumber() {
         return number;
+    }
+    public boolean isPermission() {
+        return permission;
     }
     public List<String> getItem() {
         return item;

@@ -6,6 +6,8 @@
   produce: 测试物品
   #锻造产物的数量
   number: 1
+  # 在group中显示的时候是否只有玩家拥有权限才可以查看
+  permission: true
   #锻造所需要的材料，格式为 MythicMobs物品id 所需数量，上限为9个
   item:
     - 测试物品 1

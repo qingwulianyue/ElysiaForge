@@ -58,6 +58,7 @@ public class FormulaManager {
                     group,
                     config.getString(key + ".produce"),
                     config.getInt(key + ".number"),
+                    config.getBoolean(key + ".permission"),
                     config.getStringList(key + ".item"),
                     config.getInt(key + ".money")
             );
@@ -78,6 +79,7 @@ public class FormulaManager {
             plugin.getLogger().info("§e  组: §a" + formulaData.getGroup());
             plugin.getLogger().info("§e  产物: §a" + formulaData.getProduce());
             plugin.getLogger().info("§e  数量: §a" + formulaData.getNumber());
+            plugin.getLogger().info("§e  需要权限: §a" + formulaData.isPermission());
             plugin.getLogger().info("§e  物品: §a" + formulaData.getItem());
             plugin.getLogger().info("§e  金币: §a" + formulaData.getMoney());
         }

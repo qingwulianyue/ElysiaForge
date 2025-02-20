@@ -48,6 +48,9 @@ public class GroupGui {
             if (formulaData.isPermission() && !player.hasPermission("elysiaforge." + formulaData.getId()))
                 continue;
             ItemStack formulaItem = ProjectUtils.getMythicItem(formulaData.getProduce());
+            ItemMeta formulaItemMeta = formulaItem.getItemMeta();
+            formulaItemMeta.setDisplayName(formulaData.getName());
+            formulaItem.setItemMeta(formulaItemMeta);
             inventory.setItem(i, formulaItem);
             if (i == 16)
                 i = 19;

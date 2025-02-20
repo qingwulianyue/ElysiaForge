@@ -4,3 +4,5 @@ main: main.elysiaforge.ElysiaForge
 commands:
   ElysiaForge:
     permission: admin
+    aliases:
+      - ef

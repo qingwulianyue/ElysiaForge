@@ -30,6 +30,15 @@ public class FormulaManager {
     public List<String> getFormulaDataList(){
         return new ArrayList<>(formulaDataHashMap.keySet());
     }
+    public FormulaData getFormulaDataByGroupAndName(String group, String displayName){
+        for (String s : formulaDataGroupHashMap.get(group)){
+            FormulaData formulaData = formulaDataHashMap.get(s);
+            if (formulaData.getName().equals(displayName)){
+                return formulaData;
+            }
+        }
+        return null;
+    }
 
     public void load(){
         findAllYmlFiles(new File(plugin.getDataFolder() + "/formula"));
@@ -55,6 +64,7 @@ public class FormulaManager {
             String group = config.getString(key + ".group");
             FormulaData formulaData = new FormulaData(
                     key,
+                    config.getString(key + ".name"),
                     group,
                     config.getString(key + ".produce"),
                     config.getInt(key + ".number"),
@@ -77,6 +87,7 @@ public class FormulaManager {
         if (plugin.getConfig().getBoolean("debug")) {
             plugin.getLogger().info("加载配方数据: §a" + formulaData.getId());
             plugin.getLogger().info("§e  组: §a" + formulaData.getGroup());
+            plugin.getLogger().info("§e  名称: §a" + formulaData.getName());
             plugin.getLogger().info("§e  产物: §a" + formulaData.getProduce());
             plugin.getLogger().info("§e  数量: §a" + formulaData.getNumber());
             plugin.getLogger().info("§e  需要权限: §a" + formulaData.isPermission());

@@ -46,9 +46,11 @@ public class ElysiaForgeListener implements Listener {
         String id = inventory.getTitle();
         FormulaData formulaData = ElysiaForge.getFormulaManager().getFormulaData(id);
         Player player = Bukkit.getPlayer(uuid);
-        if (slot == 44)
+        if (slot == 44){
             //当玩家点击返回时，打开对应组的显示页面
+            player.closeInventory();
             ElysiaForge.getGuiManager().openGui(formulaData.getGroup(), player.getName(), 1);
+        }
         else if (slot == 22) {
             //当玩家点击锻造时
             onPlayerStartForge(uuid, id);
@@ -87,16 +89,21 @@ public class ElysiaForgeListener implements Listener {
             ElysiaForge.getGuiManager().openGui(group, player.getName(), number + 1);
         }
         //当玩家点击展示配方范围时
-        if ((slot >= 10 && slot <= 16) || (slot >= 19 && slot <= 25) || (slot >= 28 && slot <= 34))
-            onPlayerClickGroupFormula(uuid, inventory.getItem(slot).getItemMeta().getDisplayName());
+        if ((slot >= 10 && slot <= 16) || (slot >= 19 && slot <= 25) || (slot >= 28 && slot <= 34)){
+            if (inventory.getItem(slot) != null)
+                onPlayerClickGroupFormula(uuid, inventory.getItem(slot).getItemMeta().getDisplayName(), group);
+        }
     }
     /**
      * 玩家点击配方组页面中的配方
      * @param uuid 玩家uuid
-     * @param id 配方id
+     * @param name 配方显示名称
+     * @param group 配方组
      */
-    private void onPlayerClickGroupFormula(UUID uuid, String id){
+    private void onPlayerClickGroupFormula(UUID uuid, String name, String group){
         Player player = Bukkit.getPlayer(uuid);
+        String id = ElysiaForge.getFormulaManager().getFormulaDataByGroupAndName(group, name).getId();
+        player.closeInventory();
         ElysiaForge.getGuiManager().openGui(id, player.getName());
     }
     /**
